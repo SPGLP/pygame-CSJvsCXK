@@ -29,4 +29,4 @@ class SpriteCXK(pygame.sprite.Sprite):
                 self.arrowLeft = True
 
     def randomSpeed(self):
-        self.speed = random.randint(1, 10)              # 移动速度
+        self.speed = random.randint(5, 15)              # 移动速度
