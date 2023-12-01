@@ -16,7 +16,7 @@ class SpriteCXK(pygame.sprite.Sprite):
         self.image = pygame.image.load(".\CXK.jpg")
         self.rect = self.image.get_rect()
         self.rect.y = 350
-        self.speed = random.randint(1, 10)             # 移动速度
+        self.randomSpeed()                              # 初始化移动速度
     
     def update(self):
         if self.arrowLeft == True:
@@ -27,3 +27,6 @@ class SpriteCXK(pygame.sprite.Sprite):
             self.rect.x -= self.speed
             if self.rect.x <= 0:
                 self.arrowLeft = True
+
+    def randomSpeed(self):
+        self.speed = random.randint(1, 10)              # 移动速度

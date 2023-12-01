@@ -7,7 +7,7 @@
 Create by SPGLP55(LSL01)
 Create Date : 2023.11.25
 Project CodeName : CAKEMOVE
-Version : INDEV 0.0.06.231201_1 bulid 43
+Version : INDEV 0.0.06.231201_2 bulid 44
 Description :
 *****
 起因是学校开发中心要弄一个 Python 小游戏作为入门测试
@@ -71,6 +71,7 @@ class CSJVSCXKGame(object):
                 self.zhinSoupIsDown = False
                 pygame.sprite.Sprite.kill(self.zhinSoup)
                 self.hitSound.play()
+                self.cxk.randomSpeed()          # 随机CXK移动速度
                 self.scores += 1
                 self.WinScoreCaption = "穿山甲大战蔡徐坤 Python Edition - 当前游戏得分：" + str(self.scores)
                 pygame.display.set_caption(self.WinScoreCaption)
