@@ -7,7 +7,7 @@
 Create by SPGLP55(LSL01)
 Create Date : 2023.11.25
 Project CodeName : CAKEMOVE
-Version : INDEV 0.0.05.231129_3 bulid 39
+Version : INDEV 0.0.06.231201_1 bulid 41
 Description :
 *****
 起因是学校开发中心要弄一个 Python 小游戏作为入门测试
@@ -36,6 +36,8 @@ class CSJVSCXKGame(object):
         self.screenDisplay.set_caption("穿山甲大战蔡徐坤 Python Edition")
         self.rect = self.bgImage.get_rect()
         self.clock = pygame.time.Clock()
+        self.clickSound = pygame.mixer.Sound(r".\click.ogg")    # “鸡汤来咯”
+        self.hitSound = pygame.mixer.Sound(r".\hit.ogg")        # “你干嘛~嗨嗨~哟~”
         self.cxk = SpriteCXK()                  # Class CXK
         self.cxkGroup = pygame.sprite.Group(self.cxk)
         self.csj = SpriteCSJ()                  # Class CSJ
@@ -67,6 +69,7 @@ class CSJVSCXKGame(object):
             if  self.hitCXK:
                 self.zhinSoupIsDown = False
                 pygame.sprite.Sprite.kill(self.zhinSoup)
+                self.hitSound.play()
                 self.scores += 1
                 self.WinScoreCaption = "穿山甲大战蔡徐坤 Python Edition - 当前游戏得分：" + str(self.scores)
                 pygame.display.set_caption(self.WinScoreCaption)
@@ -82,10 +85,11 @@ class CSJVSCXKGame(object):
         elif pressedKey[pygame.K_LEFT] or pressedKey[pygame.K_a]:
             self.csj.rect.x -= 5                 # 穿山甲左移
         elif pressedKey[pygame.K_DOWN] or pressedKey[pygame.K_s] or pressedKey[pygame.K_SPACE]:
-            if not self.zhinSoupIsDown:            # 投放鸡汤
+            if not self.zhinSoupIsDown:          # 投放鸡汤
                 self.zhinSoupIsDown = True       
                 self.zhinSoup = SpriteZhinSoup(self.csj.rect.x)
                 self.zhinSoupGroup = pygame.sprite.Group(self.zhinSoup)
+                self.clickSound.play()
             else:
                 pass
         else:
