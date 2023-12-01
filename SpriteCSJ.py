@@ -10,7 +10,7 @@ class SpriteCSJ(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(r".\CSJ.jpg")
+        self.image = pygame.image.load(".\CSJ.jpg")
         self.rect = self.image.get_rect()
         #self.rect.y = 0
         #self.speed = 0                      # 移动速度

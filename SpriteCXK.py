@@ -13,7 +13,7 @@ class SpriteCXK(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(r".\CXK.jpg")
+        self.image = pygame.image.load(".\CXK.jpg")
         self.rect = self.image.get_rect()
         self.rect.y = 350
         self.speed = random.randint(1, 10)             # 移动速度

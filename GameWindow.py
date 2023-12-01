@@ -7,7 +7,7 @@
 Create by SPGLP55(LSL01)
 Create Date : 2023.11.25
 Project CodeName : CAKEMOVE
-Version : INDEV 0.0.06.231201_1 bulid 41
+Version : INDEV 0.0.06.231201_1 bulid 43
 Description :
 *****
 起因是学校开发中心要弄一个 Python 小游戏作为入门测试
@@ -25,7 +25,7 @@ from SpriteZhinSoup import *
 
 class CSJVSCXKGame(object):
     """ 穿山甲大战蔡徐坤 """
-    bgImage = pygame.image.load(r".\gameBG.jpg")
+    bgImage = pygame.image.load(".\gameBG.jpg")
     #SCREEN_RECT = pygame.Rect(0,0,500,400)
 
     def __init__(self):
@@ -36,8 +36,9 @@ class CSJVSCXKGame(object):
         self.screenDisplay.set_caption("穿山甲大战蔡徐坤 Python Edition")
         self.rect = self.bgImage.get_rect()
         self.clock = pygame.time.Clock()
-        self.clickSound = pygame.mixer.Sound(r".\click.ogg")    # “鸡汤来咯”
-        self.hitSound = pygame.mixer.Sound(r".\hit.ogg")        # “你干嘛~嗨嗨~哟~”
+        pygame.mixer.init()
+        self.clickSound = pygame.mixer.Sound(".\click.ogg")    # “鸡汤来咯”
+        self.hitSound = pygame.mixer.Sound(".\hit.ogg")        # “你干嘛~嗨嗨~哟~”
         self.cxk = SpriteCXK()                  # Class CXK
         self.cxkGroup = pygame.sprite.Group(self.cxk)
         self.csj = SpriteCSJ()                  # Class CSJ
