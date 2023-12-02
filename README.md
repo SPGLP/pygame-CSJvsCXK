@@ -23,3 +23,5 @@ Version : INDEV 0.0.05.231129_3 bulid 39
 按需取用
 <br />
 COPY！COPY！(╹ڡ╹ )
+-----
+**Release测试即将开始，请转移到 release/alpha 分支阅览最新上传的 Bulid 57 版本的内容**
