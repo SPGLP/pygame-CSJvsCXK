@@ -7,7 +7,7 @@
 Create by SPGLP55(LSL01)
 Create Date : 2023.11.25
 Project CodeName : CAKEMOVE
-Version : INDEV 0.0.07.231202_3 bulid 56
+Version : INDEV 0.0.07.231202_4 bulid 57
 Description :
 *****
 起因是学校开发中心要弄一个 Python 小游戏作为入门测试
