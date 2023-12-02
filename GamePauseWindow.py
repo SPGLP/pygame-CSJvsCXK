@@ -11,6 +11,10 @@ class GamePauseWindow():
         self.fontAbout = pygame.font.SysFont('Helvetica', 15)
         self.window = classMain.window
         pygame.draw.rect(self.window, (0, 0, 0), (50, 50, 500, 300))
+        self.basketballIcon = pygame.image.load(r".\basketball.png")    # 该图片来自 石头镇1988@iconfont
+        self.window.blit(self.basketballIcon, (400, 70))
+        self.zhinsoupIcon = pygame.image.load(r".\zhinsoupicon.png")    # 该图片来自 巧@iconfont
+        self.window.blit(self.zhinsoupIcon, (450, 70))
         """ 游戏分数 """
         self.textScores = self.fontGameInfo.render("Game Scores : " + str(classMain.scores), True, (255, 236, 0))
         self.window.blit(self.textScores, (75,70))
@@ -23,7 +27,7 @@ class GamePauseWindow():
         """ 关于 """
         self.textAbout1 = self.fontGameTitle.render("CSJ VS CXK", True, (255, 225, 225))
         self.window.blit(self.textAbout1, (230,160))
-        self.textAbout2 = self.fontAbout.render("Developer: SPGLP55(LSL01)", True, (225, 225, 225))
+        self.textAbout2 = self.fontAbout.render("Developer: SPGLP55@Github", True, (225, 225, 225))
         self.window.blit(self.textAbout2, (75,200))
         #self.textAbout3 = self.fontAbout.render("本游戏是一款基于 GPL 协议进行开源的 Python 语言小游戏，使用 Pygame 进行构造。开发工具为 VSCODE", True, (255, 225, 225))
         #self.window.blit(self.textAbout3,(50,270))

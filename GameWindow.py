@@ -7,7 +7,7 @@
 Create by SPGLP55(LSL01)
 Create Date : 2023.11.25
 Project CodeName : CAKEMOVE
-Version : INDEV 0.0.06.231202_2 bulid 55
+Version : INDEV 0.0.07.231202_3 bulid 56
 Description :
 *****
 起因是学校开发中心要弄一个 Python 小游戏作为入门测试
@@ -27,7 +27,7 @@ from GamePauseWindow import *
 class CSJVSCXKGame(object):
     """ 穿山甲大战蔡徐坤 """
     scores = 0                                  # 游戏分数
-    throwTimes = 0                               # 投掷鸡汤次数
+    throwTimes = 0                              # 投掷鸡汤次数
     zhinSoupIsDown = False                      # 是否正在投放鸡汤
     hitCXK = False                              # 是否击中 CXK
     gameIsPause = False                         # 是否游戏暂停
@@ -55,7 +55,7 @@ class CSJVSCXKGame(object):
         while True:
             while not self.gameIsPause:             # 游戏 PLAY
                 self.clock.tick(30)                 # 游戏帧率
-                self.window.blit(self.bgImage,(0,0))
+                self.window.blit(self.bgImage, (0, 0))
                 self.__updateSprites()
                 self.__eventHandle()
                 pygame.display.update()
@@ -124,12 +124,6 @@ class CSJVSCXKGame(object):
 
     def setPauseStatus(self, status):
         self.gameIsPause = status
-
-    def getScores(self):
-        return self.scores
-    
-    def getThrowTimes(self):
-        return self.throwTimes
 
     @staticmethod
     def __gameOver():
