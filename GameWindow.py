@@ -7,7 +7,7 @@
 Create by SPGLP55(LSL01)
 Create Date : 2023.11.25
 Project CodeName : CAKEMOVE
-Version : INDEV 0.0.06.231202_1 bulid 53
+Version : INDEV 0.0.06.231202_2 bulid 55
 Description :
 *****
 起因是学校开发中心要弄一个 Python 小游戏作为入门测试
@@ -27,6 +27,7 @@ from GamePauseWindow import *
 class CSJVSCXKGame(object):
     """ 穿山甲大战蔡徐坤 """
     scores = 0                                  # 游戏分数
+    throwTimes = 0                               # 投掷鸡汤次数
     zhinSoupIsDown = False                      # 是否正在投放鸡汤
     hitCXK = False                              # 是否击中 CXK
     gameIsPause = False                         # 是否游戏暂停
@@ -60,13 +61,14 @@ class CSJVSCXKGame(object):
                 pygame.display.update()
             while self.gameIsPause:                 # 游戏 PAUSE
                 #self.gamePauseWindow.windowListener()
+                self.clock.tick(30)
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         CSJVSCXKGame.__gameOver()
                     elif event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_p: # 按 P 以继续游戏
                             self.setPauseStatus(False)
-                pygame.display.update()
+                #pygame.display.update()
 
     def __updateSprites(self):
         self.cxkGroup.update()
@@ -95,7 +97,7 @@ class CSJVSCXKGame(object):
                 CSJVSCXKGame.__gameOver()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:      # 按 P 以暂停游戏 
-                    self.gamePauseWindow = GamePauseWindow()
+                    self.gamePauseWindow = GamePauseWindow(self)
                     self.setPauseStatus(True)
         pressedKey = pygame.key.get_pressed()
         if pressedKey[pygame.K_RIGHT] or pressedKey[pygame.K_d]:
@@ -108,6 +110,7 @@ class CSJVSCXKGame(object):
                 self.zhinSoup = SpriteZhinSoup(self.csj.rect.x)
                 self.zhinSoupGroup = pygame.sprite.Group(self.zhinSoup)
                 self.clickSound.play()
+                self.throwTimes += 1
             else:
                 pass
             """
@@ -121,6 +124,12 @@ class CSJVSCXKGame(object):
 
     def setPauseStatus(self, status):
         self.gameIsPause = status
+
+    def getScores(self):
+        return self.scores
+    
+    def getThrowTimes(self):
+        return self.throwTimes
 
     @staticmethod
     def __gameOver():
