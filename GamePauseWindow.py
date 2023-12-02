@@ -8,14 +8,12 @@ class GamePauseWindow(CSJVSCXKGame):
         pygame.font.init()
         self.fontGameInfo = pygame.font.SysFont('宋体', 30)
         self.fontAbout = pygame.font.SysFont('宋体', 15)
-        self.screenDisplay = pygame.display
-        self.window = self.screenDisplay.set_mode((300, 400))
-        self.screenDisplay.set_caption("游戏暂停")
-        self.clock = pygame.time.Clock()
+        self.window = super().window
         self.textScores = self.fontGameInfo.render("当前得分：" + str(super().scores), True, (0, 0, 0))
         self.window.blit(self.textScores,(100,50))
         """ Add：总投放鸡汤数 """
         """ Add：命中率 """
+        pygame.draw.rect(self.window, (0, 0, 0), (50, 50, 100, 100))
         self.textAbout1 = self.fontAbout.render("CSJ VS CXK", True, (0, 0, 0))
         self.window.blit(self.textAbout1,(100,200))
         self.textAbout2 = self.fontAbout.render("作者(Developer): SPGLP55(LSL01)", True, (0, 0, 0))
@@ -28,8 +26,19 @@ class GamePauseWindow(CSJVSCXKGame):
         self.window.blit(self.textAbout1,(50,310))
         self.textAbout5 = self.fontAbout.render("按 P 键继续游戏", True, (0, 0, 0))
         self.window.blit(self.textAbout1,(50,350))
-        self.windowListener()
-    
+
+    '''
+    def windowListener(self):
+        pressedKey = pygame.key.get_pressed()
+        if pressedKey[pygame.K_p]:
+            #super().screenSet()
+            #super().gameIsPause = False
+            self.setPauseStatus(False)
+        pygame.event.pump()
+    '''
+
+
+    '''
     def windowListener(self):
         while True:
             self.clock.tick(30)
@@ -42,3 +51,4 @@ class GamePauseWindow(CSJVSCXKGame):
                 #super().gameIsPause = False
             pygame.event.pump()
             pygame.display.update()
+    '''

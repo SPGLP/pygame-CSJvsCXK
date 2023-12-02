@@ -7,7 +7,7 @@
 Create by SPGLP55(LSL01)
 Create Date : 2023.11.25
 Project CodeName : CAKEMOVE
-Version : INDEV 0.0.06.231201_3 bulid 50
+Version : INDEV 0.0.06.231202_1 bulid 53
 Description :
 *****
 起因是学校开发中心要弄一个 Python 小游戏作为入门测试
@@ -27,43 +27,46 @@ from GamePauseWindow import *
 class CSJVSCXKGame(object):
     """ 穿山甲大战蔡徐坤 """
     scores = 0                                  # 游戏分数
-    zhinSoupIsDown = False             # 是否正在投放鸡汤
-    hitCXK = False                     # 是否击中 CXK
+    zhinSoupIsDown = False                      # 是否正在投放鸡汤
+    hitCXK = False                              # 是否击中 CXK
+    gameIsPause = False                         # 是否游戏暂停
+    screenDisplay = pygame.display
+    window = screenDisplay.set_mode((600,400))
 
     def __init__(self):
         #self.screen = pygame.display.set_mode((600,400))
         #self.screen = pygame.display.set_caption("穿山甲大战蔡徐坤 Python Edition")
-        self.screenSet()
-
-    def startGame(self):
-        while not self.gameIsPause:             # 游戏 PLAY
-            self.clock.tick(30)                 # 游戏帧率
-            self.window.blit(self.bgImage,(0,0))
-            self.__updateSprites()
-            self.__eventHandle()
-            pygame.display.update()
-        while self.gameIsPause:                 # 游戏 PAUSE
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    CSJVSCXKGame.__gameOver()
-            pygame.display.update()
-    
-    def screenSet(self):
+        #self.screenSet()
         self.bgImage = pygame.image.load(".\gameBG.jpg")
         #SCREEN_RECT = pygame.Rect(0,0,500,400)
         self.cxk = SpriteCXK()                           # Class CXK
         self.cxkGroup = pygame.sprite.Group(self.cxk)
         self.csj = SpriteCSJ()                           # Class CSJ
         self.csjGroup = pygame.sprite.Group(self.csj)
-        self.screenDisplay = pygame.display
-        self.window = self.screenDisplay.set_mode((600,400))
         self.screenDisplay.set_caption("穿山甲大战蔡徐坤 Python Edition")
         self.clock = pygame.time.Clock()
         pygame.mixer.init()
         self.clickSound = pygame.mixer.Sound(".\click.ogg")    # “鸡汤来咯”
         self.hitSound = pygame.mixer.Sound(".\hit.ogg")        # “你干嘛~嗨嗨~哟~”
         self.rect = self.bgImage.get_rect()
-        self.gameIsPause = False                 # 是否游戏暂停
+
+    def startGame(self):
+        while True:
+            while not self.gameIsPause:             # 游戏 PLAY
+                self.clock.tick(30)                 # 游戏帧率
+                self.window.blit(self.bgImage,(0,0))
+                self.__updateSprites()
+                self.__eventHandle()
+                pygame.display.update()
+            while self.gameIsPause:                 # 游戏 PAUSE
+                #self.gamePauseWindow.windowListener()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        CSJVSCXKGame.__gameOver()
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_p: # 按 P 以继续游戏
+                            self.setPauseStatus(False)
+                pygame.display.update()
 
     def __updateSprites(self):
         self.cxkGroup.update()
@@ -90,6 +93,10 @@ class CSJVSCXKGame(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 CSJVSCXKGame.__gameOver()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:      # 按 P 以暂停游戏 
+                    self.gamePauseWindow = GamePauseWindow()
+                    self.setPauseStatus(True)
         pressedKey = pygame.key.get_pressed()
         if pressedKey[pygame.K_RIGHT] or pressedKey[pygame.K_d]:
             self.csj.rect.x += 5                 # 穿山甲右移
@@ -103,18 +110,22 @@ class CSJVSCXKGame(object):
                 self.clickSound.play()
             else:
                 pass
-        elif pressedKey[pygame.K_p]:
-            self.gamePauseWindow = GamePauseWindow()
-            self.gameIsPause = True
+            """
+            elif pressedKey[pygame.K_p]:
+                self.gamePauseWindow = GamePauseWindow()
+                self.setPauseStatus(True)
+            """
         else:
             pass
         pygame.event.pump()
+
+    def setPauseStatus(self, status):
+        self.gameIsPause = status
 
     @staticmethod
     def __gameOver():
         pygame.quit()
         exit()
-
 
 if __name__ == '__main__':
     game = CSJVSCXKGame()
