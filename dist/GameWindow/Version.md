@@ -1,3 +1,0 @@
-Name=INDEV 0.0.05.231129_3 bulid 40
-Date=2023/11/29
-Bulider=SPGLP55(LSL01)
