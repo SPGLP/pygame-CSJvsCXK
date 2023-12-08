@@ -35,7 +35,7 @@ class GamePauseWindow():
         self.window.blit(self.textAbout4, (75,220))
         self.textAbout4_1 = self.fontAbout.render("Buliding with Pygame. Program tool is VSCODE.", True, (255, 225, 225))
         self.window.blit(self.textAbout4_1, (75,240))
-        self.textAbout5 = self.fontAbout.render("Version: ALPHA 0.1.0.231202_4", True, (255, 225, 225))
+        self.textAbout5 = self.fontAbout.render("Version: ALPHA 0.1.0.231208_1", True, (255, 225, 225))
         self.window.blit(self.textAbout5, (75,260))
         self.textAbout6 = self.fontAbout.render("Press P back to game", True,  (255, 225, 225))
         self.window.blit(self.textAbout6, (75,300))
